@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ie.gmit.ds";
+option java_outer_classname = "PasswordProto";
+
+// The password service definition.
+service Password {
+  rpc hash (HashRequest) returns (HashReply) {}
+  rpc validate (ValidateRequest) returns (ValidateReply) {}
+}
+
+message HashRequest {
+  int32 userId = 1;
+  string password = 2;
+}
+
+message HashReply {
+  int32 userId = 1;
+  string hashPassword = 2;
+  string salt = 3;
+}
+
+message ValidateRequest {
+  string password = 1;
+  string salt = 2;
+}
+
+message ValidateReply {
+  bool valid = 1;
+}
